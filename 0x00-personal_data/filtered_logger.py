@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """module for filtering and replacing a string"""
 import re
-from typing import List
+from typing import List, Any
 import logging
 import mysql
 import mysql.connector
@@ -55,7 +55,7 @@ def get_logger() -> logging.Logger:
     return logger
 
 
-def get_db() -> mysql.connector.connection.MySQLConnectionAbstract:
+def get_db() -> Any:
     """connects to mysql database"""
     return mysql.connector.connect(
         user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
