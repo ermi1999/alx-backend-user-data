@@ -20,7 +20,7 @@ class Auth:
             return False
         for excluded_path in excluded_paths:
             if excluded_path[-1] == '*':
-                if path[:len(excluded_path) - 2] == excluded_path[:-1]:
+                if path[:len(excluded_path) - 1] == excluded_path[:-1]:
                     return False
         return True
 
