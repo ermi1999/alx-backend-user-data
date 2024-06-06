@@ -40,8 +40,8 @@ def before():
         '/api/v1/status/', '/api/v1/unauthorized/',
         '/api/v1/forbidden/', '/api/v1/auth_session/login/']
     if (auth.authorization_header(request) is None
-       and auth.session_cookie(request) is None):
-        abort(404)
+       or auth.session_cookie(request) is None):
+        abort(401)
     if auth.require_auth(request.path, paths):
         if auth.authorization_header(request) is None:
             abort(401)
