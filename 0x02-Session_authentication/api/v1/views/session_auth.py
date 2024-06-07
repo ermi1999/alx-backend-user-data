@@ -37,6 +37,7 @@ def session_auth():
 def delete():
     """deletes a session"""
     from api.v1.app import auth
-    if auth.destroy_session(request):
-        return jsonify({}), 200
-    abort(404)
+    removed = auth.destroy_session(request)
+    if not removed:
+        abort(404)
+    return jsonify({}), 200
