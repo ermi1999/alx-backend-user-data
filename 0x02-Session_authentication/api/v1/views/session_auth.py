@@ -11,7 +11,7 @@ def session_auth():
     """session auth"""
     email = request.form.get('email')
     password = request.form.get('password')
-    
+
     if not email:
         return jsonify({"error": "email missing"}), 400
     if not password:
