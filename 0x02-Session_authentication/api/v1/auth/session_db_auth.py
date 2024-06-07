@@ -9,6 +9,7 @@ class SessionDBAuth(SessionExpAuth):
     """session db auth"""
 
     def create_session(self, user_id=None):
+        """create session"""
         session_id = super().create_session(user_id)
 
         if session_id is None:
@@ -22,6 +23,7 @@ class SessionDBAuth(SessionExpAuth):
         return session_id
 
     def user_id_for_session_id(self, session_id=None):
+        """get user id for session id"""
         if not session_id:
             return None
 
