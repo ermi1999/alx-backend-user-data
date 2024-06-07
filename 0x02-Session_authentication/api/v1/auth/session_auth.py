@@ -28,11 +28,7 @@ class SessionAuth(Auth):
         user_id = self.user_id_for_session_id(s_cookie)
         if not user_id:
             return False
-        try:
-            del self.user_id_by_session_id[s_cookie]
-        except Exception:
-            pass
-
+        del self.user_id_by_session_id[s_cookie]
         return True
 
     def user_id_for_session_id(
