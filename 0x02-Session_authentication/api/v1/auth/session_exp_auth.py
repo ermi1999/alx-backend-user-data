@@ -13,6 +13,7 @@ class SessionExpAuth(SessionAuth):
             self.session_duration = int(getenv("SESSION_DURATION"))
         except Exception:
             self.session_duration = 0
+
     def create_session(self, user_id=None):
         """create session"""
         session_id = super().create_session(user_id)
@@ -25,7 +26,7 @@ class SessionExpAuth(SessionAuth):
         }
         self.user_id_by_session_id[session_id] = session_dictionary
         return session_id
-    
+
     def user_id_for_session_id(self, session_id=None):
         """user id for session id"""
         if not session_id:
