@@ -18,7 +18,21 @@ class SessionAuth(Auth):
         self.user_id_by_session_id[f'{_id}'] = user_id
         return _id
 
-    def user_id_for_session_id(self, session_id: str = None) -> str:
+    def destroy_session(self, request=None):
+        """destroy session"""
+        if not request:
+            return False
+        s_cookie = self.session_cookie(request)
+        if not s_cookie:
+            return False
+        user_id = self.user_id_for_session_id(s_cookie)
+        if not user_id:
+            return False
+        del self.user_id_by_session_id[s_cookie]
+        return True
+
+    def user_id_for_session_id(
+            self, session_id: str = None) -> str:
         """get user id with session id"""
         if not session_id or type(session_id) is not str:
             return None
