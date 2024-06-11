@@ -45,7 +45,7 @@ class DB:
             user = self._session.query(User).filter_by(**kwargs).one()
             return user
         except Exception:
-            raise
+            return None
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """updates a user"""
