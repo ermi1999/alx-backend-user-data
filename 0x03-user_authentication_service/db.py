@@ -38,7 +38,7 @@ class DB:
         self._session.add(user)
         self._session.commit()
         return user
-    
+
     def find_user_by(self, **kwargs) -> User:
         """find user"""
         try:
