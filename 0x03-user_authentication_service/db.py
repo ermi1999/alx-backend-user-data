@@ -33,9 +33,13 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """Save the user to the database"""
+        """creates a user"""
         user = User(email=email, hashed_password=hashed_password)
-        session = self._session
-        session.add(user)
-        session.commit()
+        try:
+            self._session.add(user)
+            self._session.commit()
+        except Exception as e:
+            print(f"Error adding user: {e}")
+            self._session.rollback()
+            raise
         return user
