@@ -44,3 +44,13 @@ class Auth:
                                   user.hashed_password.encode('utf-8'))
         except Exception:
             return False
+
+    def create_session(self, email: str) -> str:
+        """creates a session id for the email."""
+        try:
+            user = self._db.find_user_by(email=email)
+            uid = _generate_uuid()
+            self._db.update_user(user_id=user.id, session_id=uid)
+            return uid
+        except Exception:
+            return None
