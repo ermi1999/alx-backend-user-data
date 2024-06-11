@@ -46,3 +46,14 @@ class DB:
             return user
         except Exception:
             raise
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """updates a user"""
+        user = self.find_user_by(id=user_id)
+        columns = User.__table__.columns.keys()
+        for key, value in kwargs.items():
+            if key not in columns:
+                raise ValueError
+            setattr(user, key, value)
+        self._session.add(user)
+        self._session.commit()
